@@ -3,11 +3,15 @@ import { schema } from "./schema.ts";
 
 const yoga = createYoga({
     schema,
-    logging: true,
+    context: {
+        token: "my-secret-token",
+    },
     graphiql: {
-        defaultQuery: `{
+        defaultQuery: `
+query {
     hello
-}`,
+}
+`,
     },
 });
 

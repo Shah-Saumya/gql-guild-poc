@@ -10,8 +10,13 @@ export const resolvers = [
             hello2: () => "Hello new World!",
         },
         Mutation: {
-            createUser: (_, { name }: { name: string }) => `User ${name} created`,
-            createUser1: (_, { name }: { name: string }) => `New User ${name} created`,
+            createUser: (
+                _,
+                { name }: { name: string },
+                { token }: { token: string },
+            ) => `New User ${name} created with token ${token}`,
+            createUser1: (_, { name }: { name: string }) =>
+                `New User ${name} created`,
             createUser2: (_, { name }: { name: string }): User => ({
                 name,
             }),
