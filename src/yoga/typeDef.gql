@@ -10,6 +10,12 @@ type Mutation {
     createUser2(name: String!): User!
 }
 
+"""
+User type serves as a representation for storing user details, such as name or other relevant data fields for demonstration purposes.
+"""
 type User {
+    """
+    Name of the user.
+    """
     name: String!
 }
