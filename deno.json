@@ -1,0 +1,13 @@
+{
+    "name": "@gql-guild/poc",
+    "version": "0.1.0",
+    "imports": {
+        "graphql-yoga": "npm:graphql-yoga"
+    },
+    "fmt": {
+        "indentWidth": 4,
+        "singleQuote": false,
+        "semiColons": true
+    },
+    "lock": false
+}
