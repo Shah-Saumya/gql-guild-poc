@@ -16,7 +16,7 @@ query {
 });
 
 Deno.serve({
-    port: 4000,
+    port: 8000,
 }, async (req) => {
     const pathname = new URL(req.url).pathname;
     switch (pathname) {
