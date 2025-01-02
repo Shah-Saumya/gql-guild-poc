@@ -1,21 +1,347 @@
 type Query {
     hello: String!
-    hello1: String!
-    hello2: String!
+    getUser(id: ID!): User
+    getStudents: [Student]
+    getTeachers: [Teacher]
+    getCourses: [Course]
+    getClassrooms: [Classroom]
+    getAttendance(studentId: ID!): [Attendance]
+    getGrades(studentId: ID!): [Grade]
+    getEvents: [Event]
+    getResources: [Resource]
 }
 
 type Mutation {
-    createUser(name: String!): String!
-    createUser1(name: String!): String!
-    createUser2(name: String!): User!
+    createStudent(input: StudentInput!): Student!
+    updateStudent(id: ID!, input: StudentInput!): Student!
+    deleteStudent(id: ID!): Boolean!
+    createTeacher(input: TeacherInput!): Teacher!
+    updateTeacher(id: ID!, input: TeacherInput!): Teacher!
+    deleteTeacher(id: ID!): Boolean!
+    createCourse(input: CourseInput!): Course!
+    updateCourse(id: ID!, input: CourseInput!): Course!
+    deleteCourse(id: ID!): Boolean!
+    createClassroom(input: ClassroomInput!): Classroom!
+    updateClassroom(id: ID!, input: ClassroomInput!): Classroom!
+    deleteClassroom(id: ID!): Boolean!
+    recordAttendance(input: AttendanceInput!): Attendance!
+    inputGrade(input: GradeInput!): Grade!
+    createEvent(input: EventInput!): Event!
+    updateEvent(id: ID!, input: EventInput!): Event!
+    deleteEvent(id: ID!): Boolean!
+    uploadResource(input: ResourceInput!): Resource!
 }
 
 """
 User type serves as a representation for storing user details, such as name or other relevant data fields for demonstration purposes.
 """
 type User {
+    id: ID!
     """
     Name of the user.
     """
     name: String!
+    """
+    Role of the user.
+    """
+    role: String!
+}
+
+"""
+Student type represents a student with their details and academic records.
+"""
+type Student {
+    id: ID!
+    """
+    Name of the student.
+    """
+    name: String!
+    """
+    Enrollment date of the student.
+    """
+    enrollmentDate: String!
+    """
+    List of academic records associated with the student.
+    """
+    academicRecords: [AcademicRecord]
+}
+
+"""
+AcademicRecord type represents the academic performance of a student in a course.
+"""
+type AcademicRecord {
+    id: ID!
+    """
+    Course associated with the academic record.
+    """
+    course: Course!
+    """
+    Grade received by the student in the course.
+    """
+    grade: String!
+    """
+    Year when the academic record was created.
+    """
+    year: String!
+}
+
+"""
+Input type for creating or updating a student.
+"""
+input StudentInput {
+    """
+    Name of the student.
+    """
+    name: String!
+    """
+    Enrollment date of the student.
+    """
+    enrollmentDate: String!
+}
+
+"""
+Teacher type represents a teacher with their details and courses they teach.
+"""
+type Teacher {
+    id: ID!
+    """
+    Name of the teacher.
+    """
+    name: String!
+    """
+    List of courses taught by the teacher.
+    """
+    courses: [Course]
+}
+
+"""
+Input type for creating or updating a teacher.
+"""
+input TeacherInput {
+    """
+    Name of the teacher.
+    """
+    name: String!
+    """
+    List of course IDs associated with the teacher.
+    """
+    courseIds: [ID!]
+}
+
+"""
+Course type represents a course with its details and associated teacher.
+"""
+type Course {
+    id: ID!
+    """
+    Name of the course.
+    """
+    name: String!
+    """
+    Teacher associated with the course.
+    """
+    teacher: Teacher
+    """
+    Schedule of the course.
+    """
+    schedule: String!
+}
+
+"""
+Input type for creating or updating a course.
+"""
+input CourseInput {
+    """
+    Name of the course.
+    """
+    name: String!
+    """
+    ID of the teacher associated with the course.
+    """
+    teacherId: ID!
+    """
+    Schedule of the course.
+    """
+    schedule: String!
+}
+
+"""
+Classroom type represents a classroom with its details and resources.
+"""
+type Classroom {
+    id: ID!
+    """
+    Name of the classroom.
+    """
+    name: String!
+    """
+    Schedule of the classroom.
+    """
+    schedule: String!
+    """
+    List of resources available in the classroom.
+    """
+    resources: [Resource]
+}
+
+"""
+Input type for creating or updating a classroom.
+"""
+input ClassroomInput {
+    """
+    Name of the classroom.
+    """
+    name: String!
+    """
+    Schedule of the classroom.
+    """
+    schedule: String!
+}
+
+"""
+Attendance type represents the attendance record of a student.
+"""
+type Attendance {
+    id: ID!
+    """
+    Student associated with the attendance record.
+    """
+    student: Student!
+    """
+    Date of the attendance record.
+    """
+    date: String!
+    """
+    Status of the attendance (e.g., present, absent).
+    """
+    status: String!
+}
+
+"""
+Input type for recording attendance.
+"""
+input AttendanceInput {
+    """
+    ID of the student.
+    """
+    studentId: ID!
+    """
+    Date of the attendance record.
+    """
+    date: String!
+    """
+    Status of the attendance (e.g., present, absent).
+    """
+    status: String!
+}
+
+"""
+Grade type represents the grade received by a student in a course.
+"""
+type Grade {
+    id: ID!
+    """
+    Student associated with the grade.
+    """
+    student: Student!
+    """
+    Course associated with the grade.
+    """
+    course: Course!
+    """
+    Grade received by the student.
+    """
+    grade: String!
+}
+
+"""
+Input type for inputting a grade.
+"""
+input GradeInput {
+    """
+    ID of the student.
+    """
+    studentId: ID!
+    """
+    ID of the course.
+    """
+    courseId: ID!
+    """
+    Grade received by the student.
+    """
+    grade: String!
+}
+
+"""
+Event type represents an event with its details.
+"""
+type Event {
+    id: ID!
+    """
+    Name of the event.
+    """
+    name: String!
+    """
+    Date of the event.
+    """
+    date: String!
+    """
+    Description of the event.
+    """
+    description: String!
+}
+
+"""
+Input type for creating or updating an event.
+"""
+input EventInput {
+    """
+    Name of the event.
+    """
+    name: String!
+    """
+    Date of the event.
+    """
+    date: String!
+    """
+    Description of the event.
+    """
+    description: String!
+}
+
+"""
+Resource type represents a resource with its details.
+"""
+type Resource {
+    id: ID!
+    """
+    Name of the resource.
+    """
+    name: String!
+    """
+    URL of the resource.
+    """
+    url: String!
+    """
+    Category of the resource.
+    """
+    category: String!
+}
+
+"""
+Input type for uploading a resource.
+"""
+input ResourceInput {
+    """
+    Name of the resource.
+    """
+    name: String!
+    """
+    URL of the resource.
+    """
+    url: String!
+    """
+    Category of the resource.
+    """
+    category: String!
 }
