@@ -1,7 +1,7 @@
 import { createSchema } from "graphql-yoga";
 import { resolvers } from "./resolvers.ts";
 
-const typeDefs = await Deno.readTextFile("./typeDef.gql");
+const typeDefs = await Deno.readTextFile("src/yoga/typeDef.test.gql");
 
 export const schema = createSchema({
     typeDefs,

@@ -2,11 +2,34 @@
     "name": "@gql-guild/poc",
     "version": "0.1.0",
     "tasks": {
-        "yoga": "deno run -A src/yoga/main.ts",
-        "watch-yoga": "deno run -A --watch src/yoga/main.ts"
+        "yoga": "deno run -A src/yoga/yoga.ts",
+        "watch-yoga": "deno run -A --watch src/yoga/yoga.ts",
+        "start": "deno run -A --watch main.ts",
+        "fresh-update": "deno run -A -r https://fresh.deno.dev/update ."
     },
     "imports": {
-        "graphql-yoga": "npm:graphql-yoga"
+        "graphql-yoga": "npm:graphql-yoga",
+        "$fresh/": "https://deno.land/x/fresh@1.7.3/",
+        "preact": "https://esm.sh/preact@10.22.0",
+        "preact/": "https://esm.sh/preact@10.22.0/",
+        "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
+        "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
+        "$std/": "https://deno.land/std@0.216.0/"
+    },
+    "lint": {
+        "rules": {
+            "tags": [
+                "fresh",
+                "recommended"
+            ]
+        }
+    },
+    "exclude": [
+        "**/_fresh/*"
+    ],
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxImportSource": "preact"
     },
     "fmt": {
         "indentWidth": 4,
