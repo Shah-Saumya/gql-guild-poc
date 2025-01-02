@@ -1,6 +1,10 @@
 {
     "name": "@gql-guild/poc",
     "version": "0.1.0",
+    "tasks": {
+        "yoga": "deno run -A src/yoga/main.ts",
+        "watch-yoga": "deno run -A --watch src/yoga/main.ts"
+    },
     "imports": {
         "graphql-yoga": "npm:graphql-yoga"
     },
