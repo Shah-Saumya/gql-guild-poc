@@ -36,5 +36,6 @@
         "singleQuote": false,
         "semiColons": true
     },
+    "unstable": ["kv"],
     "lock": false
 }
